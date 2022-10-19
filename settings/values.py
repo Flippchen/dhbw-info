@@ -1,0 +1,1 @@
+mensa_endpoint = "https://www.stw-ma.de/Essen+_+Trinken/Speisepl%C3%A4ne/Mensaria+Metropol-date-CURRENT_DATE-view-week.html"
