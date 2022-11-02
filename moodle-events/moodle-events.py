@@ -7,7 +7,6 @@ from ics import Calendar
 import datetime
 from datetime import date
 import pickle
-import yaml
 
 
 # TODO: Check for other control characters
@@ -45,14 +44,11 @@ def at_start():
     events = []
     if not os.path.exists('events.data'):
         pickle.dump(events, open('events.data', 'wb'))
-    with open("../secrets.yaml", 'r') as stream:
-        secrets = yaml.load(stream, Loader=yaml.FullLoader)
-
-    return secrets
 
 
 if __name__ == '__main__':
-    webhook = at_start()
+    webhook = os.environ.get('WEBHOOK_URL')
+    at_start()
     calendar = Calendar(get_calendar_info())
     save_calendar_info(calendar)
     check_for_upcoming_events(webhook)
