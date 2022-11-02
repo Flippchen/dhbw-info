@@ -4,12 +4,11 @@
 name: Python application
 
 on:
-  on:
-    schedule:
-      - cron: "5 * * * *"
+  schedule:
+    - cron: "5 * * * *"
 
-  env:
-    WEBHOOK_URL: ${{ secrets.WEBHOOK }}
+env:
+  WEBHOOK_URL: ${{ secrets.WEBHOOK }}
 
 permissions:
   contents: read
