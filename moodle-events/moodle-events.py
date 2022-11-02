@@ -18,7 +18,6 @@ def get_calendar_info():
 
 def save_calendar_info(calendar):
     with open('calendar.ics', 'w') as file:
-        # for event in calendar.events:
         file.writelines(calendar.serialize_iter())
 
 
