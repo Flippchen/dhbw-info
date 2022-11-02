@@ -5,6 +5,7 @@ import config
 from calendar import day_name
 
 
+# TODO: Remove uneccessary description of the menu
 def get_daily_menu(offset: int) -> str:
     current_day = datetime.datetime.today().weekday()
     current_day += offset
@@ -32,7 +33,7 @@ def get_daily_menu(offset: int) -> str:
 
     for i in range(1, len(df_day)):
         menu_string += f"```{df_day.index[i]}: {df_day[i]}```"
-            
+
     return menu_string
 
 
@@ -42,10 +43,8 @@ async def get_weekly_menu(ctx, weekly_offset: int) -> None:
     offset = (next_monday - datetime.datetime.today()).days + 1
 
     await ctx.response.send_message(f"Der Essensplan für KW {next_week.isocalendar().week}:")
-    
-    for i in range(offset, offset + 5):
-        print(i)
-        print(get_daily_menu(i)[:50])
-        await ctx.channel.send(f"**{day_name[i % offset]} ({(datetime.datetime.today() + datetime.timedelta(days=i)).strftime('%d.%m.%Y')}):**" + get_daily_menu(i))
 
-    
+    for i in range(offset - 1, offset + 4):
+        date = (datetime.datetime.today() + datetime.timedelta(days=i))
+        await ctx.channel.send(
+            f"**{day_name[date.weekday()]} {date.strftime('%d.%m.%Y')}:**" + get_daily_menu(i))
