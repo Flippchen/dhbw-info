@@ -7,6 +7,7 @@ from ics import Calendar
 import datetime
 from datetime import date
 import pickle
+import yaml
 
 
 # TODO: Check for other control characters
@@ -21,7 +22,7 @@ def save_calendar_info(calendar):
         file.writelines(calendar.serialize_iter())
 
 
-def check_for_upcoming_events():
+def check_for_upcoming_events(webhook):
     events = pickle.load(open('events.data', 'rb'))
     now = datetime.datetime.now()
     delta = datetime.timedelta(days=config.delta)
@@ -33,7 +34,7 @@ def check_for_upcoming_events():
                                     "description": f"{event.description}\n**Fällig bis zum {date.fromisoformat(str(event.begin.date())).strftime('%d.%m.%Y')} **",
                                     }
                                    ]}
-                r = requests.post(config.webhook, json=data)
+                r = requests.post(webhook, json=data)
                 events.append(event.name)
                 pickle.dump(events, open('events.data', 'wb'))
                 print(event.name)
@@ -44,10 +45,14 @@ def at_start():
     events = []
     if not os.path.exists('events.data'):
         pickle.dump(events, open('events.data', 'wb'))
+    with open("../secrets.yaml", 'r') as stream:
+        secrets = yaml.load(stream, Loader=yaml.FullLoader)
+
+    return secrets
 
 
 if __name__ == '__main__':
-    at_start()
+    webhook = at_start()
     calendar = Calendar(get_calendar_info())
     save_calendar_info(calendar)
-    check_for_upcoming_events()
+    check_for_upcoming_events(webhook)
