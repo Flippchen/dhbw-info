@@ -16,15 +16,15 @@ def get_calendar_info(calendar_url):
 
 
 def save_calendar_info(calendar):
-    with open('calendar.ics', 'w') as file:
+    with open('moodle_events/calendar.ics', 'w') as file:
         file.writelines(calendar.serialize_iter())
 
 
 def check_for_upcoming_events(webhook, config_delta):
-    events = pickle.load(open('events.data', 'rb'))
+    events = pickle.load(open('moodle_events/events.data', 'rb'))
     now = datetime.datetime.now()
     delta = datetime.timedelta(days=config_delta)
-    with open('calendar.ics', 'r') as file:
+    with open('moodle_events/calendar.ics', 'r') as file:
         c = Calendar(file.read())
         for event in c.events:
             if (date.fromisoformat(str(event.begin.date())) - now.date() < delta) and event.name not in events:
@@ -34,15 +34,15 @@ def check_for_upcoming_events(webhook, config_delta):
                                    ]}
                 r = requests.post(webhook, json=data)
                 events.append(event.name)
-                pickle.dump(events, open('events.data', 'wb'))
+                pickle.dump(events, open('moodle_events/events.data', 'wb'))
                 print(event.name)
                 print(event.begin)
 
 
 def at_start():
     events = []
-    if not os.path.exists('events.data'):
-        pickle.dump(events, open('events.data', 'wb'))
+    if not os.path.exists('moodle_events/events.data'):
+        pickle.dump(events, open('moodle_events/events.data', 'wb'))
 
 
 def moodle_calendar(config_delta):
