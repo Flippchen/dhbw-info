@@ -10,7 +10,7 @@ import pickle
 
 # TODO: Check for other control characters
 def get_calendar_info(calendar_url):
-    r = requests.get(calendar_url)
+    r = requests.get(calendar_url, verify=False)
     formatted = r.text.replace("\u0308", "**")
     return formatted
 
@@ -32,7 +32,7 @@ def check_for_upcoming_events(webhook, config_delta):
                                     "description": f"{event.description}\n**Fällig bis zum {date.fromisoformat(str(event.begin.date())).strftime('%d.%m.%Y')} **",
                                     }
                                    ]}
-                r = requests.post(webhook, json=data, verify=False)
+                r = requests.post(webhook, json=data)
                 events.append(event.name)
                 pickle.dump(events, open('moodle_events/events.data', 'wb'))
                 print(event.name)
