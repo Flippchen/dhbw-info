@@ -2,4 +2,5 @@ discord.py==2.0.1
 ics==0.7.2
 pandas==1.5.1
 requests==2.27.1
-cryptography==36.0.2
+urllib3~=1.26.9
+discord~=2.0.0
