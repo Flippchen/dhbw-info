@@ -6,11 +6,12 @@ from ics import Calendar
 import datetime
 from datetime import date
 import pickle
+from own_ssl import get_legacy_session
 
 
 # TODO: Check for other control characters
 def get_calendar_info(calendar_url):
-    r = requests.get(calendar_url, verify=False)
+    r = get_legacy_session().get(calendar_url)
     formatted = r.text.replace("\u0308", "**")
     return formatted
 
@@ -50,5 +51,7 @@ def moodle_calendar(config_delta):
     calendar_url = os.environ.get('CALENDAR_URL')
     at_start()
     calendar = Calendar(get_calendar_info(calendar_url))
-    save_calendar_info(calendar)
-    check_for_upcoming_events(webhook, config_delta)
+    for event in calendar.events:
+        print(event.name)
+    #save_calendar_info(calendar)
+    #check_for_upcoming_events(webhook, config_delta)
