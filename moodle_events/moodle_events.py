@@ -36,8 +36,7 @@ def check_for_upcoming_events(webhook, config_delta):
                 r = requests.post(webhook, json=data)
                 events.append(event.name)
                 pickle.dump(events, open('moodle_events/events.data', 'wb'))
-                print(event.name)
-                print(event.begin)
+                print("After:" + event.name)
 
 
 def at_start():
@@ -52,6 +51,6 @@ def moodle_calendar(config_delta):
     at_start()
     calendar = Calendar(get_calendar_info(calendar_url))
     for event in calendar.events:
-        print(event.name)
+        print("Before: " + event.name)
     #save_calendar_info(calendar)
     #check_for_upcoming_events(webhook, config_delta)
