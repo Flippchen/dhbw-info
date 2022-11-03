@@ -52,5 +52,5 @@ def moodle_calendar(config_delta):
     calendar = Calendar(get_calendar_info(calendar_url))
     for event in calendar.events:
         print("Before: " + event.name)
-    #save_calendar_info(calendar)
-    #check_for_upcoming_events(webhook, config_delta)
+    save_calendar_info(calendar)
+    check_for_upcoming_events(webhook, config_delta)
