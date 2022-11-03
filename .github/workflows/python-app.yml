@@ -31,3 +31,4 @@ jobs:
         python main.py
       env:
         WEBHOOK_URL: ${{ secrets.WEBHOOK }}
+        CALENDAR_URL: ${{ secrets.CALENDAR_URL }}

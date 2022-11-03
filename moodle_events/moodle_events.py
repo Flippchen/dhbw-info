@@ -45,8 +45,9 @@ def at_start():
         pickle.dump(events, open('events.data', 'wb'))
 
 
-def moodle_calendar(calendar_url, config_delta):
+def moodle_calendar(config_delta):
     webhook = os.environ.get('WEBHOOK_URL')
+    calendar_url = os.environ.get('CALENDAR_URL')
     at_start()
     calendar = Calendar(get_calendar_info(calendar_url))
     save_calendar_info(calendar)
