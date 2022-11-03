@@ -2,7 +2,6 @@
 # This is a python script that will get the calendar information from moodle and put it into a csv file
 import os
 import requests
-import config
 from ics import Calendar
 import datetime
 from datetime import date
@@ -10,8 +9,8 @@ import pickle
 
 
 # TODO: Check for other control characters
-def get_calendar_info():
-    r = requests.get(config.calendar_url)
+def get_calendar_info(calendar_url):
+    r = requests.get(calendar_url)
     formatted = r.text.replace("\u0308", "**")
     return formatted
 
@@ -21,10 +20,10 @@ def save_calendar_info(calendar):
         file.writelines(calendar.serialize_iter())
 
 
-def check_for_upcoming_events(webhook):
+def check_for_upcoming_events(webhook, config_delta):
     events = pickle.load(open('events.data', 'rb'))
     now = datetime.datetime.now()
-    delta = datetime.timedelta(days=config.delta)
+    delta = datetime.timedelta(days=config_delta)
     with open('calendar.ics', 'r') as file:
         c = Calendar(file.read())
         for event in c.events:
@@ -46,9 +45,9 @@ def at_start():
         pickle.dump(events, open('events.data', 'wb'))
 
 
-if __name__ == '__main__':
+def moodle_calendar(calendar_url, config_delta):
     webhook = os.environ.get('WEBHOOK_URL')
     at_start()
-    calendar = Calendar(get_calendar_info())
+    calendar = Calendar(get_calendar_info(calendar_url))
     save_calendar_info(calendar)
-    check_for_upcoming_events(webhook)
+    check_for_upcoming_events(webhook, config_delta)
