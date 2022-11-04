@@ -38,7 +38,7 @@ jobs:
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
       with:
-        default_author: github-actions[bot]
+        default_author: github_actions
         committer_email: github-actions[bot]@users.noreply.github.com
         message: 'updated events.data'
 
