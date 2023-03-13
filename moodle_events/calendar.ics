@@ -2,16 +2,5 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Moodle Pty Ltd//NONSGML Moodle Version 2020061517//EN
 CALSCALE:GEORGIAN
-BEGIN:VEVENT
-CATEGORIES:TINF21 (AI / CS / IT)
-CLASS:PUBLIC
-DTSTAMP:20230312T200318Z
-DESCRIPTION:Liebe Studierende\,\n\nhier können Sie einen Antrag auf Klausureinsicht hochladen. Bitte nur für diejenigen\, die im März wiederholen müssen. Eine allgemeine Einsicht wird es noch geben. Sie finden den Antrag unter dem Punkt 'Vorlagen'.\n\n
-DTEND:20230308T225900Z
-LAST-MODIFIED:20230301T120042Z
-DTSTART:20230308T225900Z
-SUMMARY:UpLoad Antrag auf Klausureinsicht ist fällig.
-UID:51077401@moodle.dhbw-mannheim.de
-END:VEVENT
 METHOD:PUBLISH
 END:VCALENDAR
