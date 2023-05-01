@@ -2,5 +2,16 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Moodle Pty Ltd//NONSGML Moodle Version 2020061521//EN
 CALSCALE:GEORGIAN
+BEGIN:VEVENT
+CATEGORIES:TINF21 (AI / CS / IT)
+CLASS:PUBLIC
+DTSTAMP:20230501T200305Z
+DESCRIPTION:Die Klausureinsicht der Klausuren aus dem 3. Semester findet wie wie folgt statt:\n\n- Kurs TINF21AI2 am 10.05.2023 von 10:15 bis 11:15\n\n- Kurs TINF21AI1 am 10.05.2023 von 12:45 bis 13:45\n\nJe nach Anzahl der Anträge erfolgt die Einsicht ggf. in 2 Gruppen.\n\nBitte laden Sie den Antrag zur Klausureinsicht bis zum 03.05.2023 hoch\, wenn Sie die Klausuren einsehen möchten.\n\n
+DTEND:20230503T215900Z
+LAST-MODIFIED:20230425T082213Z
+DTSTART:20230503T215900Z
+SUMMARY:Klausureinsicht der Klausuren aus dem 3. Semester (TINF21AI1+2)  ist fällig.
+UID:52844779@moodle.dhbw-mannheim.de
+END:VEVENT
 METHOD:PUBLISH
 END:VCALENDAR
